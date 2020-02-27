@@ -52,6 +52,11 @@ public class TaxiFeeCalculatorTest {
 
     @Test
     public void should_multiple_long_distance_fee_when_distance_more_than_8() {
-        assertEquals(decimal(6 + 0.8 * 6 + 0.8 * 1.5 * 2), calculator.calculateFee(decimal(10), decimal(0)).stripTrailingZeros());
+        assertEquals(decimal(6 + 0.8*6 + 0.8*1.5*2), calculator.calculateFee(decimal(10), decimal(0)).stripTrailingZeros());
+    }
+
+    @Test
+    public void should_add_waiting_fee_if_has_waiting_time() {
+        assertEquals(decimal(6 + 3*0.25), calculator.calculateFee(decimal(2), decimal(3)).stripTrailingZeros());
     }
 }

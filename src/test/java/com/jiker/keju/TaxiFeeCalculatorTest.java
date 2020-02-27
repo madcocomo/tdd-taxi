@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static com.jiker.keju.TaxiFeeCalculator.MINIMAL_FEE;
 import static org.junit.Assert.assertEquals;
 
 public class TaxiFeeCalculatorTest {
@@ -37,8 +36,8 @@ public class TaxiFeeCalculatorTest {
 
     @Test
     public void should_return_minimal_fee_when_distance_not_more_than_2() {
-        assertEquals(MINIMAL_FEE, calculator.calculateFee(decimal(1), decimal(0)));
-        assertEquals(MINIMAL_FEE, calculator.calculateFee(decimal(2), decimal(0)));
+        assertEquals(decimal(6), calculator.calculateFee(decimal(1), decimal(0)));
+        assertEquals(decimal(6), calculator.calculateFee(decimal(2), decimal(0)));
     }
 
     @Test

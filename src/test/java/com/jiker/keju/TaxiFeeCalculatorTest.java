@@ -32,6 +32,7 @@ public class TaxiFeeCalculatorTest {
     public void should_format_decimal_fee_to_floor_int() {
         assertEquals("收费6元", calculator.format(decimal(6.3)));
         assertEquals("收费7元", calculator.format(decimal(6.7)));
+        assertEquals("收费7元", calculator.format(new BigDecimal("7.20000")));
     }
 
     @Test
@@ -58,5 +59,15 @@ public class TaxiFeeCalculatorTest {
     @Test
     public void should_add_waiting_fee_if_has_waiting_time() {
         assertEquals(decimal(6 + 3*0.25), calculator.calculateFee(decimal(2), decimal(3)).stripTrailingZeros());
+    }
+
+    @Test
+    public void should_treat_faction_distance_as_one_KM() {
+        assertEquals("收费13元", calculator.calculate(decimal(9.2), decimal(0)));
+    }
+
+    @Test
+    public void should_treat_faction_waiting_as_one_minute() {
+        assertEquals("收费7元", calculator.calculate(decimal(2), decimal(1.3)));
     }
 }

@@ -1,6 +1,7 @@
 package com.jiker.keju;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TaxiFeeCalculator {
 
@@ -12,7 +13,11 @@ public class TaxiFeeCalculator {
     public static final BigDecimal WAITING_RATE = BigDecimal.valueOf(0.25);
 
     public String calculate(BigDecimal distance, BigDecimal waiting) {
-        return format(calculateFee(distance, waiting));
+        return format(calculateFee(ceil(distance), ceil(waiting)));
+    }
+
+    private BigDecimal ceil(BigDecimal distance) {
+        return distance.setScale(0, RoundingMode.UP);
     }
 
     String format(BigDecimal fee) {

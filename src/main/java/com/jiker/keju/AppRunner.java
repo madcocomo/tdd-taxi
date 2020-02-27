@@ -1,5 +1,9 @@
 package com.jiker.keju;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class AppRunner {
 
     public static void main(String[] args) {
@@ -9,7 +13,29 @@ public class AppRunner {
           3. 将所有计费结果拼接并使用\n分割，然后保存到receipt变量中。
          */
         String testDataFile = args[0];
+        try {
+            String receipt = runEachData(testDataFile);
+            System.out.println(receipt);
+        } catch (IllegalArgumentException e) {
+            System.err.println("test data error" + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.err.println("Can not find file " + testDataFile);
+        }
+    }
+
+    private static String runEachData(String testDataFile) throws FileNotFoundException {
+        File file = new File(ClassLoader.getSystemClassLoader().getResource(testDataFile).getFile());
         String receipt = "";
-        System.out.println(receipt);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            receipt += calculate(scanner.nextLine()) + System.lineSeparator();
+        }
+        return receipt;
+    }
+
+    private static String calculate(String params) {
+        TestData testData = TestDataParser.parse(params);
+        TaxiFeeCalculator calculator = new TaxiFeeCalculator();
+        return calculator.calculate(testData.getDistance(), testData.getWaiting());
     }
 }

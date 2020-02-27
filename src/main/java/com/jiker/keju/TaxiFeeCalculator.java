@@ -22,6 +22,9 @@ public class TaxiFeeCalculator {
         if (distance > 2) {
             fee = fee.add(BigDecimal.valueOf((distance - 2) * 0.8d));
         }
+        if (distance > 8) {
+            fee = fee.add(BigDecimal.valueOf((distance - 8) * 0.5d * 0.8d));
+        }
         return fee;
     }
 }

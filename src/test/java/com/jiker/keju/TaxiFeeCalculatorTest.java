@@ -20,7 +20,7 @@ public class TaxiFeeCalculatorTest {
     }
 
     private BigDecimal decimal(double v) {
-        return BigDecimal.valueOf(v);
+        return BigDecimal.valueOf(v).setScale(4, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     @Test
@@ -48,5 +48,10 @@ public class TaxiFeeCalculatorTest {
     @Test
     public void should_add_short_distance_fee_when_distance_between_2_and_8() {
         assertEquals(decimal(6 + 0.8 * 1), calculator.calculateFee(3, 0));
+    }
+
+    @Test
+    public void should_multiple_long_distance_fee_when_distance_more_than_8() {
+        assertEquals(decimal(6 + 0.8 * 6 + 0.8 * 1.5 * 2), calculator.calculateFee(10, 0));
     }
 }

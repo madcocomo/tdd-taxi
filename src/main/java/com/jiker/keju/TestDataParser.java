@@ -1,5 +1,6 @@
 package com.jiker.keju;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +11,8 @@ public class TestDataParser {
     public static TestData parse(String data) {
         Matcher matcher = PATTERN.matcher(data);
         if (matcher.find()) {
-            float distance = Float.parseFloat(matcher.group(1));
-            float waiting = Float.parseFloat(matcher.group(2));;
+            BigDecimal distance = new BigDecimal(matcher.group(1));
+            BigDecimal waiting = new BigDecimal(matcher.group(2));
             return new TestData(distance, waiting);
         }
         throw new IllegalArgumentException("illegal test data: " + data);

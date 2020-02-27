@@ -12,7 +12,7 @@ public class TaxiFeeCalculatorTest {
 
     @Test
     public void should_calculate_fee_and_format_to_string() {
-        assertEquals("收费6元", calculator.calculate(1, 0));
+        assertEquals("收费6元", calculator.calculate(decimal(1), decimal(0)));
     }
 
     private BigDecimal decimal(int i) {
@@ -30,28 +30,28 @@ public class TaxiFeeCalculatorTest {
 
     @Test
     public void should_format_decimal_fee_to_floor_int() {
-        assertEquals("收费6元", calculator.format(decimal(6.3f)));
-        assertEquals("收费7元", calculator.format(decimal(6.7f)));
+        assertEquals("收费6元", calculator.format(decimal(6.3)));
+        assertEquals("收费7元", calculator.format(decimal(6.7)));
     }
 
     @Test
     public void should_return_minimal_fee_when_distance_not_more_than_2() {
-        assertEquals(MINIMAL_FEE, calculator.calculateFee(1, 0));
-        assertEquals(MINIMAL_FEE, calculator.calculateFee(2, 0));
+        assertEquals(MINIMAL_FEE, calculator.calculateFee(decimal(1), decimal(0)));
+        assertEquals(MINIMAL_FEE, calculator.calculateFee(decimal(2), decimal(0)));
     }
 
     @Test
     public void should_return_zero_when_no_distance() {
-        assertEquals(decimal(0), calculator.calculateFee(0, 0));
+        assertEquals(decimal(0), calculator.calculateFee(decimal(0), decimal(0)));
     }
 
     @Test
     public void should_add_short_distance_fee_when_distance_between_2_and_8() {
-        assertEquals(decimal(6 + 0.8 * 1), calculator.calculateFee(3, 0));
+        assertEquals(decimal(6 + 0.8 * 1), calculator.calculateFee(decimal(3), decimal(0)));
     }
 
     @Test
     public void should_multiple_long_distance_fee_when_distance_more_than_8() {
-        assertEquals(decimal(6 + 0.8 * 6 + 0.8 * 1.5 * 2), calculator.calculateFee(10, 0));
+        assertEquals(decimal(6 + 0.8 * 6 + 0.8 * 1.5 * 2), calculator.calculateFee(decimal(10), decimal(0)).stripTrailingZeros());
     }
 }

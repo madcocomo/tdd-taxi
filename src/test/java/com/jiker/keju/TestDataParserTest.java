@@ -2,6 +2,8 @@ package com.jiker.keju;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
@@ -12,15 +14,15 @@ public class TestDataParserTest {
     @Test
     public void should_get_int_distance_and_waiting_from_string() {
         TestData testData = TestDataParser.parse("1公里,等待0分钟");
-        assertEquals(1f, testData.getDistance(), DELTA);
-        assertEquals(0f, testData.getWaiting(), DELTA);
+        assertEquals(BigDecimal.valueOf(1), testData.getDistance());
+        assertEquals(BigDecimal.valueOf(0), testData.getWaiting());
     }
 
     @Test
     public void should_get_float_distance_and_waiting_from_string() {
         TestData testData = TestDataParser.parse("1.5公里,等待0.5分钟");
-        assertEquals(1.5f, testData.getDistance(), DELTA);
-        assertEquals(0.5f, testData.getWaiting(), DELTA);
+        assertEquals(BigDecimal.valueOf(1.5), testData.getDistance());
+        assertEquals(BigDecimal.valueOf(0.5), testData.getWaiting());
     }
 
     @Test

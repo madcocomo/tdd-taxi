@@ -1,19 +1,21 @@
 package com.jiker.keju;
 
-public class TestData {
-    private float distance;
-    private float waiting;
+import java.math.BigDecimal;
 
-    public TestData(float distance, float waiting) {
+public class TestData {
+    private BigDecimal distance;
+    private BigDecimal waiting;
+
+    public TestData(BigDecimal distance, BigDecimal waiting) {
         this.distance = distance;
         this.waiting = waiting;
     }
 
-    public float getDistance() {
+    public BigDecimal getDistance() {
         return distance;
     }
 
-    public float getWaiting() {
+    public BigDecimal getWaiting() {
         return waiting;
     }
 }

@@ -8,13 +8,16 @@ public class TaxiFeeCalculator {
         return format(calculateFee(distance, waiting));
     }
 
-    String format(int fee) {
-        return String.format("收费%d元", fee);
+    String format(Float fee) {
+        return String.format("收费%d元", Math.round(fee));
     }
 
-    public int calculateFee(float distance, float waiting) {
+    public float calculateFee(float distance, float waiting) {
         if (distance == 0) {
             return 0;
+        }
+        if (distance > 2) {
+            return MINIMAL_FEE + (distance - 2) * 0.8f;
         }
         return MINIMAL_FEE;
     }

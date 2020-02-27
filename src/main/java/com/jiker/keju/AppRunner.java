@@ -2,7 +2,6 @@ package com.jiker.keju;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class AppRunner {
@@ -29,8 +28,8 @@ public class AppRunner {
     }
 
     private static String calculate(String params) {
-        TestData testData = TestDataParser.parse(params);
+        Args args = new ArgDataParser().parse(params);
         TaxiFeeCalculator calculator = new TaxiFeeCalculator();
-        return calculator.calculate(testData.getDistance(), testData.getWaiting());
+        return calculator.calculate(args.getDistance(), args.getWaiting());
     }
 }

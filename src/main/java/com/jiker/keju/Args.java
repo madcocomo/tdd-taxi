@@ -2,11 +2,11 @@ package com.jiker.keju;
 
 import java.math.BigDecimal;
 
-public class TestData {
+public class Args {
     private BigDecimal distance;
     private BigDecimal waiting;
 
-    public TestData(BigDecimal distance, BigDecimal waiting) {
+    public Args(BigDecimal distance, BigDecimal waiting) {
         this.distance = distance;
         this.waiting = waiting;
     }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TestDataParser {
+public class ArgDataParser {
 
     public static final Pattern PATTERN = Pattern.compile("^(.+)公里,等待(.+)分钟$");
 
